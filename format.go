@@ -7,6 +7,7 @@ import (
 
 	"github.com/olekukonko/tablewriter"
 	"github.com/optiopay/klar/clair"
+	"github.com/optiopay/klar/formatter"
 )
 
 var SeverityStyle = map[string]string{
@@ -68,6 +69,33 @@ func jsonFormat(conf *config, output jsonOutput) int {
 	})
 	enc := json.NewEncoder(os.Stdout)
 	enc.Encode(output)
+
+	return vsNumber
+}
+
+func junitFormat(conf *config, output jsonOutput) int {
+	vsNumber := 0
+	iteratePriorities(conf.ClairOutput, func(sev string) {
+		if conf.IgnoreUnfixed {
+			// need to iterate over store[sev]
+			for _, v := range store[sev] {
+				if v.FixedBy != "" {
+					vsNumber++
+				}
+			}
+		} else {
+			vsNumber += len(store[sev])
+		}
+		output.Vulnerabilities[sev] = store[sev]
+		standardFormat(conf, output.Vulnerabilities[sev])
+	})
+
+	err := formatter.JUnitReportXML(output.Vulnerabilities, conf.DockerConfig.ImageName)
+	if err != nil {
+		fmt.Println(err)
+		// TODO
+		return 10000000
+	}
 
 	return vsNumber
 }

@@ -61,11 +61,11 @@ func main() {
 	if len(image.FsLayers) == 0 {
 		fail("Can't pull fsLayers")
 	} else {
-		if conf.JSONOutput {
-			output.LayerCount = len(image.FsLayers)
-		} else {
-			fmt.Printf("Analysing %d layers\n", len(image.FsLayers))
-		}
+		// if conf.JSONOutput {
+		output.LayerCount = len(image.FsLayers)
+		// } else {
+		fmt.Printf("Analysing %d layers\n", len(image.FsLayers))
+		// }
 	}
 
 	var vs []*clair.Vulnerability
@@ -103,6 +103,8 @@ func main() {
 		switch style := conf.FormatStyle; style {
 		case "table":
 			vsNumber = tableFormat(conf, vs)
+		case "junit":
+			vsNumber = junitFormat(conf, output)
 		default:
 			vsNumber = standardFormat(conf, vs)
 		}

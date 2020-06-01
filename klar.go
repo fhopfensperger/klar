@@ -48,7 +48,7 @@ const (
 )
 
 var priorities = []string{"Unknown", "Negligible", "Low", "Medium", "High", "Critical", "Defcon1"}
-var formatTypes = []string{"standard", "json", "table"}
+var formatTypes = []string{"standard", "json", "table", "junit"}
 
 func parseOutputPriority() (string, error) {
 	clairOutput := priorities[0]
