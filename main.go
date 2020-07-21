@@ -10,7 +10,18 @@ import (
 
 var store = make(map[string][]*clair.Vulnerability)
 
+var (
+	// version is set during build
+	version = "0.0.0"
+)
+
 func main() {
+
+	if len(os.Args) == 2 && os.Args[1] == "version" {
+		fmt.Printf("v%s\n", version)
+		os.Exit(0)
+	}
+
 	fail := func(format string, a ...interface{}) {
 		fmt.Fprintf(os.Stderr, fmt.Sprintf("%s\n", format), a...)
 		os.Exit(2)
