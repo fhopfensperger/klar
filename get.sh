@@ -120,12 +120,6 @@ downloadAndInstall() {
   runAsRoot mv ${BINARY_NAME} ${INSTALL_DIR}/
   runAsRoot chmod +x ${INSTALL_DIR}/${BINARY_NAME}
 
-  location=$(which $BINARY_NAME)
-  echo "${BINARY_NAME} binary location: $location"
-
-  version="$($BINARY_NAME -v)"
-  echo "${BINARY_NAME} binary version: $version"
-
   rm /tmp/${BINARY_NAME}.tar.gz
 }
 
