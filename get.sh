@@ -18,8 +18,8 @@
 # the package manager for Go: https://github.com/Masterminds/glide.sh/blob/master/get
 # and the Helm install script https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 : ${INSTALL_DIR:="/usr/local/bin"}
-: ${BINARY_NAME:="klar}
-: ${$USE_SUDO:="true"}
+: ${BINARY_NAME:="klar"}
+: ${USE_SUDO:="true"}
 
 installNotes() {
   echo "Installing ${BINARY_NAME}..."
@@ -92,7 +92,7 @@ checkDesiredVersion() {
 
 # checkInstalledVersion checks which version of klar is installed and
 # if it needs to be changed.
-checkjl2hrInstalledVersion() {
+checkInstalledVersion() {
   if [[ -f "$INSTALL_DIR/$BINARY_NAME" ]]; then
     local version=$("$INSTALL_DIR/$BINARY_NAME" version)
     if [[ "$version" == "$TAG" ]]; then
