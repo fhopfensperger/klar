@@ -55,7 +55,7 @@ need to be booted with `-insecure-tls` for this to work.
 
 * `JSON_OUTPUT` - Output JSON, not plain text. Default is `false`.
 
-* `FORMAT_OUTPUT` - Output format of the vulnerabilities. Supported formats are `standard`, `json`, `table`. Default is `standard`. If `JSON_OUTPUT` is set to true, this option is ignored.
+* `FORMAT_OUTPUT` - Output format of the vulnerabilities. Supported formats are `standard`, `json`, `table`, `junit`. Default is `standard`. If `JSON_OUTPUT` is set to true, this option is ignored. If `junit` is set, a CLAIR-<image>.xml file will be created.
 
 * `WHITELIST_FILE` - Path to the YAML file with the CVE whitelist. Look at `whitelist-example.yaml` for the file format.
 
